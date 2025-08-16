@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "gRHO/isuNnlG7EG6XbEOq0OSHQrlYJjqdMQpJ6JEOaM=",
+  "Source": "BattleGame.Api",
+  "BasePath": "_content/BattleGame.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

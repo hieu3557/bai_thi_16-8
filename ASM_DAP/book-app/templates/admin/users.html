@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>User Management</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="{{ url_for('admin_edit_user', user_id=user._id) }}" 
+                       class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ url_for('admin_delete_user', user_id=user._id) }}" 
+                       class="btn btn-sm btn-danger" 
+                       onclick="return confirm('Are you sure to delete this user?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

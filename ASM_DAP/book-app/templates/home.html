@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to {{ config.SITE_NAME }}!</h1>
+    <p class="lead">Explore our collection of {{ stats.total_books }} books across {{ stats.total_categories }} categories.</p>
+    <a class="btn btn-primary btn-lg mt-3" href="/categories" role="button">
+        Browse All Categories
+    </a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h4>Top Categories</h4>
+        <div class="list-group">
+            {% for category in popular_categories %}
+            <a href="{{ url_for('books', category=category._id) }}" 
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ category._id }}
+                <span class="badge bg-primary rounded-pill">{{ category.count }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h4>New Arrivals</h4>
+        <div class="list-group">
+            {% for book in recent_books %}
+            <a href="{{ url_for('book_detail', book_id=book._id) }}" 
+               class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ book.title }}</h5>
+                    <small>{{ book.category }}</small>
+                </div>
+                <p class="mb-1 text-muted">{{ book.author }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

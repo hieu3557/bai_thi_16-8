@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Book{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add New Book</h2>
+    <form method="POST" class="mt-4">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" name="author" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-control" name="category" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Book</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>About Our Library</h2>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Our Collection</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Total Books: <span class="badge bg-primary">{{ stats.total_books }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Categories: <span class="badge bg-success">{{ stats.total_categories }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Active Users: <span class="badge bg-info">{{ stats.total_users }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mt-md-0 mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Contact Information</h5>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-geo-alt"></i> 123 Library Street</li>
+                    <li><i class="bi bi-telephone"></i> (123) 456-7890</li>
+                    <li><i class="bi bi-envelope"></i> contact@booklib.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">{{ book.title }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+                <dl class="row mt-3">
+                    <dt class="col-sm-4">Category</dt>
+                    <dd class="col-sm-8">{{ book.category }}</dd>
+                    
+                    <dt class="col-sm-4">Published Date</dt>
+                    <dd class="col-sm-8">
+                        {% if book.published_date %}
+                            {{ book.published_date|date_format }}
+                        {% else %}
+                            Not available
+                        {% endif %}
+                    </dd>
+                    
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.id in book.borrowed_by %}
+                                <span class="text-success">Borrowed by you</span>
+                            {% else %}
+                                <span class="text-muted">Available</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="text-muted">Login to check availability</span>
+                        {% endif %}
+                    </dd>
+                </dl>
+                
+                {% if current_user.is_authenticated %}
+                    <div class="d-grid gap-2">
+                        {% if current_user.id in book.borrowed_by %}
+                            <a href="{{ url_for('return_book', book_id=book._id) }}" 
+                               class="btn btn-danger">
+                                Return Book
+                            </a>
+                        {% else %}
+                            <a href="{{ url_for('borrow_book', book_id=book._id) }}" 
+                               class="btn btn-primary">
+                                Borrow Book
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Description</h5>
+                <p class="card-text">{{ book.description }}</p>
+                
+                <h5 class="mt-4">Borrowing History</h5>
+                <ul class="list-group">
+                    {% for user_id in book.borrowed_by %}
+                        {% set user = mongo.db.users.find_one({'_id': user_id}) %}
+                        {% if user %}
+                            <li class="list-group-item">
+                                {{ user.name }} ({{ user.email }})
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="list-group-item">No borrowing records</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
